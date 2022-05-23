@@ -14,17 +14,25 @@ const Chat = (props) => {
     }
 
     return (
-        <div>
-            <p>You chat on the channel : channel_1</p>
-            <p>All your messages below</p>
-            { props.allMessages.map((message, i) =>
-                <p key={i}>{ message }</p>
-            )}
+        <div className="all-body">
+            <div className="one-card margin-bottom">
+                <p>You chat on the channel_1</p>
+                <div className="all-messages">
+                    { props.allMessages.map((message, i) =>
+                        <p className="one-message" key={i}>{ message }</p>
+                    )}
+                </div>
 
-            <form onChange={onChangeHandler} onSubmit={onSubmitHandler}>
-                <input type="text" name="chat" />
-                <input type="submit" name="submit" />
-            </form>
+            </div>
+
+            <div className="one-card margin-bottom">
+                <p>Write and send your message</p>
+                <form onChange={onChangeHandler} onSubmit={onSubmitHandler}>
+                    <input className="input-in-card" type="text" name="chat" />
+                    <input className="button-color" type="submit" name="submit" />
+                </form>
+            </div>
+
         </div>
     );
 };
