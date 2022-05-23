@@ -1,22 +1,32 @@
-import logo from './logo.svg';
-import {useEffect} from "react"
+import { useEffect, useState } from "react"
 import './App.css';
-import {initSocket, sendSocketMessage} from "./functions/socket";
-
+import { initSocket, sendSocketMessage } from "./functions/socket";
+import Chat from './componentes/Chat.js'
 
 function App() {
-  useEffect(()=>{
+
+  // initialisation de la connexion entre l'application et le serveur
+  useEffect(() => {
     initSocket();
     sendSocketMessage();
-  },[]);
+  },[])
+
+  const [allMessages, setAllMessages] = useState([])
+
+  const sendMessage = (value) => {
+    sendSocketMessage(value)
+    // udpate all messages
+    setAllMessages((array) => [...array, value])
+  }
   
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+
+        <Chat
+            sendMessage={sendMessage}
+            allMessages={allMessages}
+        />
         
       </header>
     </div>
